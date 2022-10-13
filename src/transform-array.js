@@ -21,7 +21,7 @@ function transform(arr) {
   let newArr = []
   
   for(let i = 0; i < arr.length; i++){
-    switch( arr[i] ){
+    switch(arr[i]) {
       case '--double-next':
         if(i !== arr.length - 1){
           newArr.push(arr[i + 1]);
