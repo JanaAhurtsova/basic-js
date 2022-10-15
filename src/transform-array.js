@@ -18,7 +18,7 @@ function transform(arr) {
     throw new Error("'arr' parameter must be an instance of the Array!")
   }
 
-  let newArr = []
+  let newArr = [];
   
   for(let i = 0; i < arr.length; i++){
     switch(arr[i]) {
