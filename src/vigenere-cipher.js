@@ -33,10 +33,9 @@ class VigenereCipheringMachine {
     let arr = [];
     let encodeArr = [];
     let result = '';
-    let regexp = /[^a-zA-Z]/g;
-    let regexp1 = /^[a-zA-Z]+$/i;
+    let regexp = /^[A-Z]+$/i;
     let ind = 0;
-    let sortMessage = message.replace(regexp, '').toUpperCase();
+    let sortMessage = message.replace(/[^a-zA-Z]/g, '').toUpperCase();
     let maxLength = Math.max(key.length, sortMessage.length);
 
     for(let i = 0; i< maxLength; i++) {
@@ -53,8 +52,8 @@ class VigenereCipheringMachine {
     }
 
     for(let i = 0; i < message.length; i++) {
-      if(!regexp.test(message[i])) {
-        result += message[i].replace(regexp1, encodeArr[ind]);
+      if(regexp.test(message[i])) {
+        result += message[i].replace(regexp, encodeArr[ind]);
         ind++;
       } else {
         result+= message[i];
@@ -68,17 +67,16 @@ class VigenereCipheringMachine {
       throw new Error('Incorrect arguments!');
     }
 
-    let arr = []
-    let encodeArr = []
+    let arr = [];
+    let encodeArr = [];
     let result = '';
-    let regexp = /[^a-zA-Z]/g
-    let regexp1 = /^[a-zA-Z]+$/i
-    let ind = 0
-    let sortEncryptedMessage =encryptedMessage.replace(regexp, '')
-    let maxLength = Math.max(key.length, sortEncryptedMessage.length)
+    let regexp = /^[A-Z]+$/i;
+    let ind = 0;
+    let sortEncryptedMessage =encryptedMessage.replace(/[^a-zA-Z]/g, '');
+    let maxLength = Math.max(key.length, sortEncryptedMessage.length);
 
     for(let i = 0; i< maxLength; i++) {
-      let k = this.alphabet.indexOf(key[(i>=key.length) ? i%key.length : i].toUpperCase());
+      let k = this.alphabet.indexOf(key[((i>=key.length) ? i%key.length : i)].toUpperCase());
       let m = this.alphabet.indexOf(sortEncryptedMessage[(i >= sortEncryptedMessage.length) ? i%sortEncryptedMessage.length : i])
       
       arr.push((m - k) < 0 ? (m - k) + 26 : (m - k))
@@ -91,8 +89,8 @@ class VigenereCipheringMachine {
     }
 
     for(let i = 0; i < encryptedMessage.length; i++) {
-      if(!regexp.test(encryptedMessage[i])) {
-        result += encryptedMessage[i].replace(regexp1, encodeArr[ind])
+      if(regexp.test(encryptedMessage[i])) {
+        result += encryptedMessage[i].replace(regexp, encodeArr[ind])
         ind++
       } else {
         result+= encryptedMessage[i]
