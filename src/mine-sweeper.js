@@ -24,28 +24,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  * ]
  */
 function minesweeper(matrix) {
-  let newMatrix = matrix.map(el => el.map(i => 0))
-    for(let i =0; i < matrix.length; i++) {
-      for( let j = 0; j < matrix[0].length; j++) {
-        count = 0
-        if(matrix[j][i-1] === true) count += 1;
-        if(matrix[j][i+1] === true) count += 1;
+  let newMatrix = matrix.map(el => el.map(item => 0));
+  
+  for(let i =0; i < matrix.length; i++) {
+    for( let j = 0; j < matrix[0].length; j++) {
+      let count = 0
 
-        if(j < matrix[0].length-1) {
-          if(matrix[j+1][i-1] === true) count+=1;
-          if(matrix[j+1][i+1] === true) count+=1;
-          if(matrix[j+1][i] === true) count+=1;
-        }
+      if(matrix[i][j-1] === true) count += 1;
+      if(matrix[i][j+1] === true) count += 1;
 
-        if(j > 0) {
-          if(matrix[j-1][i+1] === true) count+=1;
-          if(matrix[j-1][i-1] === true) count+=1;
-          if(matrix[j-1][i] === true) count+=1;
-        }
-      
-        newMatrix[i][j] = count
+      if(i > 0) {
+        if(matrix[i-1][j-1] === true) count += 1;
+        if(matrix[i-1][j] === true) count += 1;
+        if(matrix[i-1][j+1] === true) count += 1;
       }
+
+      if(i < matrix.length - 1) {
+        if(matrix[i+1][j-1] === true) count += 1;
+        if(matrix[i+1][j] === true) count += 1;
+        if(matrix[i+1][j+1] === true) count += 1;
+      }
+    
+      newMatrix[i][j] = count
     }
+  }
   return newMatrix
 }
 
